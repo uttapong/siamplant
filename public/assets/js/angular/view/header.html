@@ -1,0 +1,77 @@
+<div class="header">
+        <div class="bar">
+        <a class="logo" href="<?php route('home')?>"><img src="assets/images/siamplant_logo.png"/></a>
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="<?php route('home')?>">หน้าแรก {{test}}<span class="sr-only">(current)</span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">หมวดหมู่ <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">แคคตัส และไม้อวบน้ำ</a></li>
+            <li><a href="#">ทิลแอนเซีย</a></li>
+            <li><a href="#">กล้วยไม้</a></li>
+            <li><a href="#">ต้นไม้อื่นๆ</a></li>
+            <li class="divider"></li>
+            <li><a href="#">อุปกรณ์</a></li>
+            <li><a href="#">วัสดุปลูก</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="ค้นหา">
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+      @if (Auth::check())
+        <li><a href="<?php  route('newitem') ?>"><i class="fa fa-plus fa-lg"></i> ลงประกาศ </a> </li>
+        <li><a href="<?php route('cart')?>">ตะกร้า <span class="badge @if(Auth::user()->getcartcount()>0) progress-bar-success @endif"><?php  Auth::user()->getcartcount() ?></span></a></li>
+        <li><a href="<?php route('order')?>">ร้าน <span class="badge @if(Auth::user()->getshopcount()>0) progress-bar-success @endif"><?php  Auth::user()->getshopcount() ?></span></a></li>
+        
+        <li>
+        <?php
+          if(Auth::user()->picture)$image=Imagecache::get(Auth::user()->id.'/profile/'.Auth::user()->picture, 'profile');
+          else  $image=Imagecache::get('no-image.jpg', 'profile');
+        ?>
+            <img class="profile-icon" src="<?php $image->src?>" />
+       
+         
+          </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          
+          @if(Auth::user()->displayname) <?php Auth::user()->displayname ?>@else <?php  Auth::user()->firstname ?> <?php  Auth::user()->lastname ?> @endif<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="<?php  route('useredit',array(Auth::user()->id)) ?>"><span class="glyphicon glyphicon-edit"></span> แก้ไขข้อมูลส่วนตัว</a></li>
+            <li><a href="<?php  route('shop',Auth::user()->username ) ?>"><i class="fa fa-coffee"></i> ร้านค้าของคุณ</a></li>
+            <li class="divider"></li>
+            <li><a href="<?php route('logout')?>">ออกจากระบบ</a></li>
+          </ul>
+        </li>
+      @else
+      <div class='notauthened'>
+      <a href='<?php  action('UserController@login'); ?>' class='btn btn-info btn-xs' >เข้าสู่ระบบ</a>
+    <button onclick="loginFB();" class='btn btn-primary btn-xs' ><i class="fa fa-facebook-square fa-lg"></i> Facebook Signin</button>
+    <button onclick='window.location.href="<?php  action('UserController@signup'); ?>"' class="btn btn-success btn-xs"><span class="glyphicon glyphicon-user"></span> สมัครสมาชิก</button>
+      </div>
+      @endif
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+        </div>
+    </div>
