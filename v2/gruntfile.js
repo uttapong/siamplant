@@ -139,7 +139,21 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
-		}
+		},
+		mongobackup: {
+	    options: {
+	      host : 'localhost',
+	      port: '27017',
+	      db : 'siamplant-dev', 
+	      dump:{
+	        out : './dump',
+	      },    
+	      restore:{
+	        path : './dump/siamplant-dev',          
+	        drop : true
+	      }
+	    }  
+	  }
 	});
 
 	// Load NPM tasks
@@ -174,4 +188,5 @@ module.exports = function(grunt) {
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	grunt.loadNpmTasks('grunt-mongo-backup');
 };

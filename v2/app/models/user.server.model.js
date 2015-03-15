@@ -59,7 +59,71 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer']
 	},
-	salt: {
+	address: {
+		type: String,
+	},
+	district: {
+		type: String,
+	},
+	province: {
+		type: String,
+	},
+	phone: {
+		type: String,
+	},
+	mobile: {
+		type: String,
+	},
+	picture: {
+		type: String,
+	},
+	signature: {
+		type: String,
+	},
+	birthdate: {
+		type: Date,
+	},
+	role: {
+		type: String,
+	},
+	status: {
+		type: String,
+	},
+	ip_registered: {
+		type: String,
+	},
+	favitems: [{
+		type: Schema.ObjectId,
+		ref: 'Item',
+	}],
+	shopname: {
+		type: String,
+	},
+	displayname: {
+		type: String,
+	},
+	shopemail: {
+		type: String,
+	},
+	shoppicture: {
+		type: String,
+	},
+	shoptel: {
+		type: String,
+	},
+	shopbank: {
+		type: String,
+	},
+	shopbankaccount: {
+		type: String,
+	},
+	shopaddress: {
+		type: String
+	},
+	shopprovince: {
+		type: String
+	},
+	shopstart: {
 		type: String
 	},
 	provider: {
@@ -76,6 +140,9 @@ var UserSchema = new Schema({
 		default: ['user']
 	},
 	updated: {
+		type: Date
+	},
+	lastlogin: {
 		type: Date
 	},
 	created: {

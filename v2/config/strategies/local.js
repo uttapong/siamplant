@@ -22,7 +22,7 @@ module.exports = function() {
 				}
 				if (!user) {
 					return done(null, false, {
-						message: 'Unknown user or invalid password'
+						message: 'No user found'
 					});
 				}
 				if (!user.authenticate(password)) {
